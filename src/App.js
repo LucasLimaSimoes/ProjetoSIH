@@ -7,7 +7,7 @@ function App() {
       <div className="containerLogin">
         <input type="text" placeholder="Usuário"></input>
         <input type="text" placeholder="Senha"></input>
-        <button className="buttonEnter">Entrar</button>
+        <button className="buttonEnter" onClick={alert("Botão pressionado")}>Entrar</button>
       </div>
     </div>
   );
