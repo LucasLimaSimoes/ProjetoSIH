@@ -10,9 +10,8 @@ const db = mysql.createPool({
 });
 
 app.get("/", (req,res) =>{
-    const sqlInsert = "INSERT INTO users (user, password) VALUES ('admin', 'admin');";
-    db.query(sqlInsert, (err, result) =>{
-        res.send("Hello world");
+    db.query("INSERT INTO usuarios (user, password) VALUES ('teste', 'teste')", (err, result) =>{
+        res.send("Teste4");
     });
 });
 
