@@ -1,0 +1,15 @@
+
+.home{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.titulo{
+    padding: 15px;
+}
+
+.subtitulo{
+    padding: 15px;
+}

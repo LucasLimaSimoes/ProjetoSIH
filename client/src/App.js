@@ -1,8 +1,13 @@
 import React from 'react';
-import Routes from "./Routes";
+import { BrowserRouter } from 'react-router-dom';
+import Rotas from "./routes";
 
 export default function App() {
   return (
-      <Routes/>
+    <>
+      <BrowserRouter>
+        <Rotas/>
+      </BrowserRouter>
+    </>
   );
 }
