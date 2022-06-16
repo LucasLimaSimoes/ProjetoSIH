@@ -1,9 +1,9 @@
 import React from 'react';
 import './home.css'
-import barra_lateral from './barra_lateral';
+import {barra_lateral} from './barra_lateral';
 
 
-const home = () => {
+function home () {
     return(
         <div>
             <barra_lateral/>

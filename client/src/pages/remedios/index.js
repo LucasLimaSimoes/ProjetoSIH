@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const remedios = () => {
+function remedios () {
     return(
         <div className='remedios'>
             <h1 className='titulo'>Página de remedios</h1>

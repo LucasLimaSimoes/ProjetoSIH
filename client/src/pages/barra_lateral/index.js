@@ -3,7 +3,7 @@ import React from 'react';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 
-export default function barra_lateral() {
+function barra_lateral() {
     return (
       <>
         <Navigation
@@ -53,3 +53,5 @@ export default function barra_lateral() {
       </>
     );
 }
+
+export default barra_lateral;

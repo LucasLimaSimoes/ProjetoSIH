@@ -8,8 +8,8 @@ import Medicos from "../pages/medicos";
 import Pacientes from "../pages/pacientes";
 import Remedios from "../pages/remedios";
 
-const Rotas = () => {
-   return(
+function Rotas() {
+   return (
        <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/home" element={<Home/>}/>

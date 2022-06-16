@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const pacientes = () => {
+function pacientes () {
     return(
         <div className='pacientes'>
             <h1 className='titulo'>Página de pacientes</h1>
