@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './medicos.css'
 import Axios from 'axios'
+import { AiFillHome } from "react-icons/ai";
+import {Link} from 'react-router-dom';
 
 
 function medicos () {
@@ -33,6 +35,10 @@ function medicos () {
     
     return(
         <div className='container_medicos'>
+            <header>
+                <Link to="/home"><AiFillHome size={25} color="#FFF"/></Link>
+                <h2>Página de Médicos</h2>
+            </header>
             <div className='m_cadastro'>
                 <h1 className='m_titulo'>Cadastro de Médicos</h1>
                 <div className='subCadastro'>

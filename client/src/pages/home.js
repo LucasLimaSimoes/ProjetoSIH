@@ -1,15 +1,21 @@
 import React from 'react';
-import './home.css'
-import {barra_lateral} from './barra_lateral';
+import './home.css';
+import {Link} from 'react-router-dom';
 
 
 function home () {
     return(
         <div>
-            <barra_lateral/>
+            <header>
+                <h1>Home</h1>
+            </header>
             <div className='home'>
-                <h1 className='titulo'>Bem vindo ao sistema [inserir nome]</h1>
-                <h2 className='subtitulo'>Você está na página principal, use a barra lateral para começar a usar o sisterma</h2>
+                <h1 className='titulo'>Bem vindo ao SIHMPLR</h1>
+                <h2 className='subtitulo'>Você está na página principal, selecione abaixo o que deseja fazer</h2>
+                <h2><Link to="/medicos">Médicos</Link></h2>
+                <h2><Link to="/pacientes">Pacientes</Link></h2>
+                <h2><Link to="/remedios">Remedios</Link></h2>
+                <h2><Link to="/leitos">Leitos</Link></h2>
             </div>
         </div>
     );

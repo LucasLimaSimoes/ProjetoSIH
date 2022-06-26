@@ -31,10 +31,10 @@ app.post("/cadastro", (req,res) => {
     })*/
 });
 
-app.get("/login", (req,res) =>{
+app.post("/login", (req,res) =>{
     const user = req.body.user
     const password = req.body.password
-    db.query("SELECT * FROM usuarios WHERE user = ?", [user], (err, result) =>{
+    db.query("SELECT * FROM usuarios WHERE user = ?", user, (err, result) =>{
         if (err){
             console.log(err)
         }
@@ -66,6 +66,31 @@ app.get("/medicos", (req,res) =>{
 app.delete("/medicos/deletar/:crm", (req,res) =>{
     const crm = req.params.crm
     db.query("DELETE FROM medicos WHERE crm = ?", crm, (err, result) =>{
+        if (err) console.log(err)
+    })
+})
+
+//remedios
+app.post("/remedios/cadastro", (req,res) =>{
+    const nome = req.body.nome
+    const qte = req.body.qte
+    const lote = req.body.lote
+    const validade = req.body.validade
+    db.query("INSERT INTO remedios (nome, qte, lote, validade) VALUES (?,?,?,?)", [nome, qte, lote, validade], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/remedios", (req,res) =>{
+    db.query("SELECT * FROM remedios", (err, result) => {
+        res.send(result)
+    })
+})
+
+app.delete("/remedios/deletar/:lote/:nome", (req,res) =>{
+    const lote = req.params.lote
+    const nome = req.params.nome
+    db.query("DELETE FROM remedios WHERE lote = ? AND nome = ?", [lote, nome], (err, result) =>{
         if (err) console.log(err)
     })
 })
