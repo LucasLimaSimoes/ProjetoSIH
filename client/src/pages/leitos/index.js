@@ -1,24 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Chart} from 'react-google-charts'
 import _ from 'lodash'
-
-export const data_uti = [
-    ["Situação", "Quantidade"],
-    ["Live", 40],
-    ["Ocupado", 10],
-  ];
-
-export const data_enfermaria = [
-    ["Situação", "Quantidade"],
-    ["Live", 85],
-    ["Ocupado", 15],
-  ];
-
-export const data_total = [
-    ["Situação", "Quantidade"],
-    ["Live", 125],
-    ["Ocupado", 25],
-  ];
+import Axios from 'axios'
+import {AiFillHome} from "react-icons/ai";
+import {Link} from 'react-router-dom'; 
 
   export const options_uti = {
     title: "UTI",
@@ -33,25 +18,38 @@ export const data_total = [
   };
 
 
-function leitos () {
-    const [chartData, setChartData] = useState([]);
+function Leitos () {
+    const [leitosVagas, setLeitosVagas] = useState([])
+    const totalVagas = _.sumBy(leitosVagas, function(o) {return o.qte})
 
-    const loadData = (data) => {
-        const valueTotal = _.sumBy(data, function(o) {return o.quantidade})
-    }
+    const data_uti = [
+      ["Situação", "Quantidade"],
+      ["Live", 40 /*leitosVagas[0].qte*/],
+      ["Ocupado", 10],
+    ];
+    const data_enfermaria = [
+      ["Situação", "Quantidade"],
+      ["Live", 85],
+      ["Ocupado", 15],
+    ];
+    const data_total = [
+      ["Situação", "Quantidade"],
+      ["Live", totalVagas],
+      ["Ocupado", 25],
+    ];
 
     useEffect(() => {
-        const data = [
-            {idleito: "1", tipo: "UTI", quantidade: "50"},
-            {idleito: "2", tipo: "Enfermaria", quantidade: "100"},
-        ]
-
-        loadData(data)
+      Axios.get("http://localhost:3001/leitos").then((response) =>{
+        setLeitosVagas(response.data)
+      })
     }, [])
 
     return(
         <div className='leitos'>
-            <header><h2>Página de Leitos</h2></header>
+            <header>
+                <Link to="/home"><AiFillHome size={25} color="#FFF"/></Link>
+                <h2>Página de Leitos</h2>
+            </header>
             <div className='charts'>
                 <Chart
                 chartType="PieChart"
@@ -79,4 +77,4 @@ function leitos () {
     );
 }
 
-export default leitos;
+export default Leitos;

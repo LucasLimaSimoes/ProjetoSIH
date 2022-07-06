@@ -3,7 +3,7 @@ import './home.css';
 import {Link} from 'react-router-dom';
 
 
-function home () {
+function Home () {
     return(
         <div>
             <header>
@@ -21,4 +21,4 @@ function home () {
     );
 }
 
-export default home;
+export default Home;

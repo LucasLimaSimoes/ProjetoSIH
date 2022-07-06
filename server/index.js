@@ -36,11 +36,11 @@ app.post("/login", (req,res) =>{
     const password = req.body.password
     db.query("SELECT * FROM usuarios WHERE user = ?", user, (err, result) =>{
         if (err){
-            console.log(err)
+            res.send(err)
         }
         if (result.lenght>0){
-            bcrypt.compare(password, result[0].password, (err, result) =>{
-                if(result){
+            bcrypt.compare(password, result[0].password, (error, response) =>{
+                if(response){
                     res.send(result)
                 }
             })
@@ -92,6 +92,28 @@ app.delete("/remedios/deletar/:lote/:nome", (req,res) =>{
     const nome = req.params.nome
     db.query("DELETE FROM remedios WHERE lote = ? AND nome = ?", [lote, nome], (err, result) =>{
         if (err) console.log(err)
+    })
+})
+
+//leitos
+app.get("/leitos", (req, res) =>{
+    db.query("SELECT qte FROM leitos", (err, result) => {
+        res.send(result)
+    })
+})
+
+//pacientes
+app.post("/pacientes/cadastro", (req, res) => {
+    const nome = req.body.nome
+    const sus = req.body.sus
+    db.query("INSERT INTO pacientes (nome, sus) VALUES (?, ?)", [nome, sus], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/pacientes", (req, res) =>{
+    db.query("SELECT * FROM pacientes", (err, result) => {
+        res.send(result)
     })
 })
 

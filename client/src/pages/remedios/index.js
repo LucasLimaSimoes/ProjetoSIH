@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios'
 
 
-function remedios () {
+function Remedios () {
 
     const [nome, setNome] = useState('')
     const [qte, setQTE] = useState(0)
@@ -12,7 +12,6 @@ function remedios () {
 
     const cadastrarRemedio = () =>{
         Axios.post("http://localhost:3001/remedios/cadastro", {nome:nome, qte:qte, lote:lote, validade:validade})
-        setMedicosList([...remediosList, {nome:nome, qte:qte, lote:lote, validade:validade},])
         .then(() => {
             alert("Cadastro realizado com sucesso")
         })
@@ -20,7 +19,6 @@ function remedios () {
 
     const deletarRemedio = (lote, nome) =>{
         Axios.delete(`http://localhost:3001/remedios/deletar/${lote}/${nome}`)
-        
         .then(() => {
             alert("Apagado com sucesso")
         })
@@ -30,7 +28,7 @@ function remedios () {
         Axios.get("http://localhost:3001/remedios").then((response) => {
             setRemediosList(response.data)
         })
-    }, [])
+    })
     
     return(
         <div className='container_remedios'>
@@ -40,13 +38,13 @@ function remedios () {
                     <input type='text' name='nome' placeholder='Nome' onChange={(e)=>{
                         setNome(e.target.value)
                     }}/>
-                    <input type='number' name='qte' placeholder='Quantidade'onChange={(e)=>{
+                    <input type='number' name='qte' placeholder='Quantidade' onChange={(e)=>{
                         setQTE(e.target.value)
                     }}/>
-                    <input type='number' name='lote' placeholder='Lote'onChange={(e)=>{
+                    <input type='number' name='lote' placeholder='Lote' onChange={(e)=>{
                         setLote(e.target.value)
                     }}/>
-                    <input type='number' name='validade' placeholder='Validade'onChange={(e)=>{
+                    <input type='date' name='validade' placeholder='Validade' onChange={(e)=>{
                         setValidade(e.target.value)
                     }}/>
                 </div>
@@ -67,4 +65,4 @@ function remedios () {
     );
 }
 
-export default remedios;
+export default Remedios;

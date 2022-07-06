@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './medicos.css'
 import Axios from 'axios'
-import { AiFillHome } from "react-icons/ai";
+import {AiFillHome} from "react-icons/ai";
 import {Link} from 'react-router-dom';
 
 
-function medicos () {
+function Medicos () {
 
     const [nome, setNome] = useState('')
     const [crm, setCRM] = useState(0)
@@ -31,7 +31,7 @@ function medicos () {
         Axios.get("http://localhost:3001/medicos").then((response) => {
             setMedicosList(response.data)
         })
-    }, [])
+    })
     
     return(
         <div className='container_medicos'>
@@ -52,7 +52,7 @@ function medicos () {
                 <button type='submit' onClick={cadastrarMedico}>Cadastrar</button>
             </div>
             <div className='m_listagem'>
-                <h1 className='m_titulo'> Listagem de Médicos</h1>
+                <h1 className='m_titulo'>Listagem de Médicos</h1>
                 {medicosList.map((value) => {
                     return(
                         <div className='card_m'>
@@ -66,4 +66,4 @@ function medicos () {
     );
 }
 
-export default medicos;
+export default Medicos;
