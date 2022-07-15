@@ -35,9 +35,9 @@ function Medicos () {
     
     return(
         <div className='container_medicos'>
-            <header>
+            <header className='cabecalho'>
                 <Link to="/home"><AiFillHome size={25} color="#FFF"/></Link>
-                <h2>Página de Médicos</h2>
+                <h2 className='cabecalho_titulo'>Página de Médicos</h2>
             </header>
             <div className='m_cadastro'>
                 <h1 className='m_titulo'>Cadastro de Médicos</h1>
@@ -45,7 +45,7 @@ function Medicos () {
                     <input type='text' name='nome' placeholder='Nome' onChange={(e)=>{
                         setNome(e.target.value)
                     }}/>
-                    <input type='text' name='crm' placeholder='CRM'onChange={(e)=>{
+                    <input type='number' name='crm' placeholder='CRM'onChange={(e)=>{
                         setCRM(e.target.value)
                     }}/>
                 </div>
@@ -62,6 +62,9 @@ function Medicos () {
                     )
                 })}
             </div>
+            <footer className='rodape'>
+                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+            </footer>
         </div>
     );
 }

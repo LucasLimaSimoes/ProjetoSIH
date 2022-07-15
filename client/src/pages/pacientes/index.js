@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './pacientes.css'
 import Axios from 'axios'
 import {AiFillHome} from "react-icons/ai";
 import {Link} from 'react-router-dom';
@@ -25,9 +26,9 @@ function Pacientes () {
     
     return(
         <div className='container_pacientes'>
-            <header>
+            <header className='cabecalho'>
                 <Link to="/home"><AiFillHome size={25} color="#FFF"/></Link>
-                <h2>Página de Pacientes</h2>
+                <h2 className='cabecalho_titulo'>Página de Pacientes</h2>
             </header>
             <div className='p_cadastro'>
                 <h1 className='p_titulo'>Cadastro de Pacientes</h1>
@@ -35,7 +36,7 @@ function Pacientes () {
                     <input type='text' name='nome' placeholder='Nome' onChange={(e)=>{
                         setNome(e.target.value)
                     }}/>
-                    <input type='text' name='sus' placeholder='Número do cartão SUS'onChange={(e)=>{
+                    <input type='number' name='sus' placeholder='Número do cartão SUS'onChange={(e)=>{
                         setSUS(e.target.value)
                     }}/>
                 </div>
@@ -52,6 +53,9 @@ function Pacientes () {
                     )
                 })}
             </div>
+            <footer className='rodape'>
+                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+            </footer>
         </div>
     );
 }

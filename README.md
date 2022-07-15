@@ -1,5 +1,5 @@
 # TCC
-## Projeto SIHMPLR
+## Projeto Sistema de Informação Hospitalar
 
 ## Instalação
 

@@ -1,3 +1,4 @@
+
 .cabecalho{
     background-color: rgb(0, 66, 121);
     display: flex;
@@ -8,25 +9,9 @@
     color: white;
 }
 
-/*.container_medicos{
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    padding: 20px 15px;
-    border-radius: 10px;
-}*/
-
-.subCadastro{
+.charts_1{
     display: flex;
-    flex-direction: line;
-}
-
-.card_m{
-    width: max-content;
-    height: max-content;
-    border: 5px solid black;
-    border-radius: 15px;
-    padding: 5px;
+    flex-direction: line;  
 }
 
 .rodape{

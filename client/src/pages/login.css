@@ -1,24 +1,23 @@
-
 .container{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background: linear-gradient(darkblue, lightblue);
 }
 
 .title{
     font-size: 50px;
     font-weight: bold;
-    color:orangered;
+    color: white;
     animation: flip 5s;
 }
 
 .containerLogin{
-    background-color: antiquewhite;
-    padding: 10px;
-    margin: 30px 0px;
+    background-color: rgb(172, 171, 171);
+    padding: 0px 25px 80px 25px;
+    margin: 30px 10px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -26,10 +25,11 @@
 }
 
 .containerLogin input{
-    background-color: transparent;
-    border:0px;
+    border: 10px;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    position: relative;
+    top: 25px;
     color: black;
 }
 
@@ -41,6 +41,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 45px;
 }
 
 @keyframes flip {

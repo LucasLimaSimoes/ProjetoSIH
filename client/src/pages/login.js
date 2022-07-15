@@ -29,7 +29,7 @@ function Login () {
   
     return (
       <div className="container">
-        <h1 className="title">SIHMPLR</h1>
+        <h1 className="title">Sistema de Informação Hospitalar</h1>
         <div className="containerLogin">
           <input type="text" name="user" placeholder="Usuário" onChange={(e)=>{
             setUser(e.target.value)

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import './leitos.css'
 import {Chart} from 'react-google-charts'
 import _ from 'lodash'
 import Axios from 'axios'
@@ -7,14 +8,17 @@ import {Link} from 'react-router-dom';
 
   export const options_uti = {
     title: "UTI",
+    chartArea: {left: '25%'}
   };
 
   export const options_enfermaria = {
     title: "Enfermaria",
+    chartArea: {right: '10%'}
   };
 
   export const options_total = {
     title: "Total",
+    chartArea: {left: '45%'}
   };
 
 
@@ -46,33 +50,38 @@ function Leitos () {
 
     return(
         <div className='leitos'>
-            <header>
+            <header className='cabecalho'>
                 <Link to="/home"><AiFillHome size={25} color="#FFF"/></Link>
-                <h2>Página de Leitos</h2>
+                <h2 className='cabecalho_titulo'>Página de Leitos</h2>
             </header>
-            <div className='charts'>
+            <div className='charts_1'>
                 <Chart
                 chartType="PieChart"
                 data={data_uti}
                 options={options_uti}
-                width={"100%"}
+                width={"90%"}
                 height={"400px"}
                 />
                 <Chart
                 chartType="PieChart"
                 data={data_enfermaria}
                 options={options_enfermaria}
-                width={"100%"}
+                width={"90%"}
                 height={"400px"}
                 />
+              </div>
+              <div className='charts_2'>
                 <Chart
                 chartType="PieChart"
                 data={data_total}
                 options={options_total}
-                width={"100%"}
+                width={"90%"}
                 height={"400px"}
                 />
             </div>
+            <footer className='rodape'>
+                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+            </footer>
         </div>
     );
 }

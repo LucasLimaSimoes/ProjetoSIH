@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios'
+import './remedios.css'
+import {AiFillHome} from "react-icons/ai";
+import {Link} from 'react-router-dom';
 
 
 function Remedios () {
@@ -32,6 +35,10 @@ function Remedios () {
     
     return(
         <div className='container_remedios'>
+            <header className='cabecalho'>
+                <Link to="/home"><AiFillHome size={25} color="#FFF"/></Link>
+                <h2 className='cabecalho_titulo'>Página de Remédios</h2>
+            </header>
             <div className='r_cadastro'>
                 <h1 className='r_titulo'>Cadastro de Remedios</h1>
                 <div className='subCadastro'>
@@ -61,6 +68,9 @@ function Remedios () {
                     )
                 })}
             </div>
+            <footer className='rodape'>
+                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+            </footer>
         </div>
     );
 }
