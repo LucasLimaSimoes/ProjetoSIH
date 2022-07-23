@@ -87,6 +87,12 @@ app.get("/remedios", (req,res) =>{
     })
 })
 
+app.get("/remedios/vencer", (req,res) =>{
+    db.query("SELECT nome, qte, lote, validade, DATEDIFF(validade, CURRENT_DATE) AS dias FROM remedios", (err, result) => {
+        res.send(result)
+    })
+})
+
 app.delete("/remedios/deletar/:lote/:nome", (req,res) =>{
     const lote = req.params.lote
     const nome = req.params.nome
@@ -113,6 +119,13 @@ app.post("/pacientes/cadastro", (req, res) => {
 
 app.get("/pacientes", (req, res) =>{
     db.query("SELECT * FROM pacientes", (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/pacientes/:idpacientes", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    db.query("SELECT * FROM pacientes WHERE idpacientes = ?", idpacientes, (err, result) => {
         res.send(result)
     })
 })

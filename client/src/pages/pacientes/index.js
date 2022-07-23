@@ -48,13 +48,13 @@ function Pacientes () {
                     return(
                         <div className='card_p'>
                             <h2>{value.nome} | {value.sus}</h2>
-                            <button>Detalhes</button>
+                            <Link to={'/pacientes/'+value.idpacientes}><button>Detalhes</button></Link>
                         </div>
                     )
                 })}
             </div>
             <footer className='rodape'>
-                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+                <h1 className='rodape_titulo'>Feito por Lucas Lima Simões</h1>
             </footer>
         </div>
     );

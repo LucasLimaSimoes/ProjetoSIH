@@ -6,6 +6,7 @@ import Home from "../pages/home";
 import Leitos from "../pages/leitos";
 import Medicos from "../pages/medicos";
 import Pacientes from "../pages/pacientes";
+import PacientesDetalhes from "../pages/pacientes/pacientes.detalhes";
 import Remedios from "../pages/remedios";
 
 function Rotas() {
@@ -16,6 +17,7 @@ function Rotas() {
         <Route path="/leitos" element={<Leitos/>}/>
         <Route path="/medicos" element={<Medicos/>}/>
         <Route path="/pacientes" element={<Pacientes/>}/>
+        <Route path="/pacientes/:idpacientes" element={<PacientesDetalhes/>}/>
         <Route path="/remedios" element={<Remedios/>}/>
        </Routes>
    );

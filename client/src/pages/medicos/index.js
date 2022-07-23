@@ -63,7 +63,7 @@ function Medicos () {
                 })}
             </div>
             <footer className='rodape'>
-                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+                <h1 className='rodape_titulo'>Feito por Lucas Lima Simões</h1>
             </footer>
         </div>
     );

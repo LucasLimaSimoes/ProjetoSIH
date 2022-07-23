@@ -12,6 +12,7 @@ function Remedios () {
     const [lote, setLote] = useState(0)
     const [validade, setValidade] = useState(new Date())
     const [remediosList, setRemediosList] = useState([])
+    const [remediosVencerList, setRemediosVencerList] = useState([])
 
     const cadastrarRemedio = () =>{
         Axios.post("http://localhost:3001/remedios/cadastro", {nome:nome, qte:qte, lote:lote, validade:validade})
@@ -30,6 +31,12 @@ function Remedios () {
     useEffect(() => {
         Axios.get("http://localhost:3001/remedios").then((response) => {
             setRemediosList(response.data)
+        })
+    })
+
+    useEffect(() => {
+        Axios.get("http://localhost:3001/remedios/vencer").then((response) => {
+            setRemediosVencerList(response.data)
         })
     })
     
@@ -57,19 +64,30 @@ function Remedios () {
                 </div>
                 <button type='submit' onClick={cadastrarRemedio}>Cadastrar</button>
             </div>
+            <div className='r_vencer'>
+                <h1 className='r_tituloVencer'>Remédios Perto do Vencimento</h1>
+                {remediosVencerList.map((value) => {
+                    if (value.dias < 31) {
+                        return(
+                            <div className='card_vencer'>
+                                <h2>{value.nome} | {value.qte} | {value.lote} | {value.validade} | {value.dias}</h2>
+                                <button onClick={() => {deletarRemedio(value.lote, value.nome)}}>Apagar</button>
+                            </div>
+                    )}
+                })}
+            </div>
             <div className='r_listagem'>
-                <h1 className='r_titulo'> Listagem de Remedios</h1>
+                <h1 className='r_titulo'>Listagem de Remedios</h1>
                 {remediosList.map((value) => {
                     return(
                         <div className='card_r'>
-                            <h2>{value.nome} | {value.qte} | {value.lote} | {value.validade}</h2>
-                            <button onClick={() => {deletarRemedio(value.lote, value.nome)}}>Apagar</button>
+                            <h2>{value.nome} | {value.qte}</h2>
                         </div>
                     )
                 })}
             </div>
             <footer className='rodape'>
-                <h1 className='rodape_titulo'>© Lucas Lima Simões</h1>
+                <h1 className='rodape_titulo'>Feito por Lucas Lima Simões</h1>
             </footer>
         </div>
     );
