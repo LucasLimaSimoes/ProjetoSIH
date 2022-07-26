@@ -130,6 +130,70 @@ app.get("/pacientes/:idpacientes", (req, res) =>{
     })
 })
 
+app.put("/pacientes/:idpacientes/atualizar", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    const nome = req.body.nome
+    const sus = req.body.sus
+    db.query("UPDATE pacientes SET nome = ?, sus = ? WHERE idpacientes = ?", [nome, sus, idpacientes], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post("/pacientes/:idpacientes/consulta/adicionar", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    const medico = req.body.medico
+    const prontuario = req.body.prontuario
+    db.query("INSERT INTO paciente_medico (FK_paciente, FK_medico, prontuario) VALUES (?, ?, ?)", [idpacientes, medico, prontuario], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/pacientes/:idpacientes/consulta", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    db.query("SELECT * FROM paciente_medico WHERE FK_paciente = ?", idpacientes, (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post("/pacientes/:idpacientes/remedio/adicionar", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    const remedio = req.body.remedio
+    const qte = req.body.qte
+    db.query("INSERT INTO paciente_remedio (FK_paciente, FK_remedio, qte) VALUES (?, ?, ?)", [idpacientes, remedio, qte], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/pacientes/:idpacientes/remedio", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    db.query("SELECT * FROM paciente_remedio WHERE FK_paciente = ?", idpacientes, (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/pacientes/:idpacientes/leito", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    db.query("SELECT * FROM paciente_leito WHERE idpacientes = ?", idpacientes, (err, result) => {
+        res.send(result)
+    })
+})
+
+app.put("/pacientes/:idpacientes/leito/atualizar", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    const selecaoLeito = req.body.selecaoLeito
+    db.query("UPDATE paciente_leito SET leito = ? WHERE FK_paciente = ?", [selecaoLeito, idpacientes], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post("/pacientes/:idpacientes/leito/inserir", (req, res) =>{
+    const idpacientes = req.params.idpacientes
+    const selecaoLeito = req.body.selecaoLeito
+    db.query("INSERT INTO paciente_leito (FK_paciente, leito) VALUES (?, ?)", [idpacientes, selecaoLeito], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.listen(3001, () => {
     console.log("rodando na porta 3001")
 });
