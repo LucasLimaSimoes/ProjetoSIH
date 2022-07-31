@@ -103,7 +103,13 @@ app.delete("/remedios/deletar/:lote/:nome", (req,res) =>{
 
 //leitos
 app.get("/leitos", (req, res) =>{
-    db.query("SELECT qte FROM leitos", (err, result) => {
+    db.query("SELECT * FROM leitos", (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get("/leitos/ocupacao", (req, res) =>{
+    db.query("SELECT leito, COUNT(FK_paciente) AS qte FROM paciente_leito GROUP BY leito", (err, result) => {
         res.send(result)
     })
 })
@@ -173,7 +179,7 @@ app.get("/pacientes/:idpacientes/remedio", (req, res) =>{
 
 app.get("/pacientes/:idpacientes/leito", (req, res) =>{
     const idpacientes = req.params.idpacientes
-    db.query("SELECT * FROM paciente_leito WHERE idpacientes = ?", idpacientes, (err, result) => {
+    db.query("SELECT * FROM paciente_leito WHERE FK_paciente = ?", idpacientes, (err, result) => {
         res.send(result)
     })
 })

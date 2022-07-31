@@ -8,7 +8,6 @@ function PacientesDetalhes () {
 
     const {idpacientes} = useParams();
     const [pacienteDetalhes, setPacienteDetalhes] = useState([])
-
     const [nome, setNome] = useState('')
     const [sus, setSUS] = useState(0)
 
@@ -22,8 +21,8 @@ function PacientesDetalhes () {
     const [qte, setQTE] = useState(0)
     const [remediosLevadosList, setRemediosLevadosList] = useState([])
 
+    const [leitoOcupado, setLeitoOcupado] = useState([])
     const [selecaoLeito, setSelecaoLeito] = useState('')
-    const [teste, setTeste] = useState([])
 
     const atualizarPaciente = () =>{
         Axios.put(`http://localhost:3001/pacientes/${idpacientes}/atualizar`, {nome:nome, sus:sus})
@@ -47,11 +46,7 @@ function PacientesDetalhes () {
     }
 
     const atualizarLeito = () =>{
-        Axios.get(`http://localhost:3001/pacientes/${idpacientes}/leito`)
-        .then((response) => {
-            setTeste(response.data)
-        })
-        if(teste.length>0){
+        if(leitoOcupado.length>0){
             Axios.put(`http://localhost:3001/pacientes/${idpacientes}/leito/atualizar`, {selecaoLeito:selecaoLeito})
             .then(() => {
                 alert("Leitos atualizados")
@@ -69,35 +64,42 @@ function PacientesDetalhes () {
         .then((response) => {
             setPacienteDetalhes(response.data)
         })
-    }, [])
+    })
 
     useEffect(() => {
         Axios.get("http://localhost:3001/medicos")
         .then((response) => {
             setMedicosList(response.data)
         })
-    }, [])
+    })
 
     useEffect(() => {
         Axios.get("http://localhost:3001/remedios")
         .then((response) => {
             setRemediosList(response.data)
         })
-    }, [])
+    })
 
     useEffect(() => {
         Axios.get(`http://localhost:3001/pacientes/${idpacientes}/consulta`)
         .then((response) => {
             setConsultas(response.data)
         })
-    }, [])
+    })
 
     useEffect(() => {
         Axios.get(`http://localhost:3001/pacientes/${idpacientes}/remedio`)
         .then((response) => {
             setRemediosLevadosList(response.data)
         })
-    }, [])
+    })
+
+    useEffect(() => {
+        Axios.get(`http://localhost:3001/pacientes/${idpacientes}/leito`)
+        .then((response) => {
+            setLeitoOcupado(response.data)
+        })
+    })
 
     return(
         <div>
@@ -130,7 +132,7 @@ function PacientesDetalhes () {
             {consultas.map((value) => {
                     return(
                         <div className='detalhes_medicos_sub'>
-                            <h2>Médico: {value.FK_medico} | Prontuário: {value.prontuario} | Data: {value.data}</h2>
+                            <p>Médico: {value.FK_medico} | Prontuário: {value.prontuario} | Data: {value.data}</p>
                         </div>
                     )
                 })}
@@ -145,14 +147,14 @@ function PacientesDetalhes () {
             <input type='number' name='prontuario' placeholder='Prontuário' onChange={(e)=>{
                 setProntuario(e.target.value)
             }}/>
-            <button type='submit' onClick={atualizarConsulta}>Salvar Alterações</button>
+            <button type='submit' onClick={atualizarConsulta}>Gravar Consulta</button>
         </div>
         <div className='detalhes_remedios'>
             <h1>Remédios tomados</h1>
             {remediosLevadosList.map((value) => {
                     return(
                         <div className='detalhes_remedios_sub'>
-                            <h2>Remédio: {value.FK_remedio} | Quantidade: {value.qte} | Data: {value.data}</h2>
+                            <p>Remédio: {value.FK_remedio} | Quantidade: {value.qte} | Data: {value.data}</p>
                         </div>
                     )
                 })}
@@ -167,16 +169,21 @@ function PacientesDetalhes () {
             <input type='number' name='qte' placeholder='Quantidade' onChange={(e)=>{
                 setQTE(e.target.value)
             }}/>
-            <button type='submit' onClick={atualizarRemedios}>Salvar Alterações</button>
+            <button type='submit' onClick={atualizarRemedios}>Atualizar Remédios</button>
         </div>
         <div className='detalhes_leito'>
             <h1>Seleção de leito</h1>
+            {leitoOcupado.map((value) => {
+                return(
+                    <p>O leito atualmente ocupado é: {value.leito}</p>
+                )
+            })}
             <select name='selecaoLeito' onChange={(e)=>{setSelecaoLeito(e.target.value)}}>
                 <option value='liberado'>Liberado</option>
                 <option value='UTI'>UTI</option>
                 <option value='Enfermaria'>Enfermaria</option>
             </select>
-            <button type='submit' onClick={atualizarLeito}>Salvar Alterações</button>
+            <button type='submit' onClick={atualizarLeito}>Atualizar Leitos</button>
         </div>
             
         </div>

@@ -26,7 +26,7 @@
 
 .detalhes_medicos{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .detalhes_medicos_sub{
@@ -36,7 +36,7 @@
 
 .detalhes_remedios{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .detalhes_remedios_sub{
