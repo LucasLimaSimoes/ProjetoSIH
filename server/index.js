@@ -34,17 +34,10 @@ app.post("/cadastro", (req,res) => {
 app.post("/login", (req,res) =>{
     const user = req.body.user
     const password = req.body.password
-    db.query("SELECT * FROM usuarios WHERE user = ?", user, (err, result) =>{
-        if (err){
-            res.send(err)
-        }
-        if (result.lenght>0){
-            bcrypt.compare(password, result[0].password, (error, response) =>{
-                if(response){
-                    res.send(result)
-                }
-            })
-        }
+    db.query("SELECT * FROM usuarios WHERE usuario = ?", user, (err, result) =>{
+        bcrypt.compare(password, result.senha, (error, response) => {
+            res.send(result)
+        })
     })
 })
 
@@ -88,7 +81,7 @@ app.get("/remedios", (req,res) =>{
 })
 
 app.get("/remedios/vencer", (req,res) =>{
-    db.query("SELECT nome, qte, lote, validade, DATEDIFF(validade, CURRENT_DATE) AS dias FROM remedios", (err, result) => {
+    db.query("SELECT remedios.nome, (remedios.qte - IFNULL(paciente_remedio.qte, 0)) AS qte, remedios.lote, remedios.validade, DATEDIFF(remedios.validade, CURRENT_DATE) AS dias FROM remedios LEFT JOIN paciente_remedio ON remedios.idremedios = paciente_remedio.FK_remedio", (err, result) => {
         res.send(result)
     })
 })
@@ -98,6 +91,12 @@ app.delete("/remedios/deletar/:lote/:nome", (req,res) =>{
     const nome = req.params.nome
     db.query("DELETE FROM remedios WHERE lote = ? AND nome = ?", [lote, nome], (err, result) =>{
         if (err) console.log(err)
+    })
+})
+
+app.get("/remedios/estoque", (req,res) =>{
+    db.query("SELECT remedios.idremedios, remedios.nome, (remedios.qte - IFNULL(paciente_remedio.qte, 0)) AS qte, remedios.lote, remedios.validade FROM remedios LEFT JOIN paciente_remedio ON remedios.idremedios = paciente_remedio.FK_remedio", (err, result) =>{
+        res.send(result)
     })
 })
 
@@ -129,6 +128,7 @@ app.get("/pacientes", (req, res) =>{
     })
 })
 
+//detalhes
 app.get("/pacientes/:idpacientes", (req, res) =>{
     const idpacientes = req.params.idpacientes
     db.query("SELECT * FROM pacientes WHERE idpacientes = ?", idpacientes, (err, result) => {
@@ -156,7 +156,7 @@ app.post("/pacientes/:idpacientes/consulta/adicionar", (req, res) =>{
 
 app.get("/pacientes/:idpacientes/consulta", (req, res) =>{
     const idpacientes = req.params.idpacientes
-    db.query("SELECT * FROM paciente_medico WHERE FK_paciente = ?", idpacientes, (err, result) => {
+    db.query("SELECT medicos.nome, paciente_medico.prontuario, paciente_medico.data FROM paciente_medico INNER JOIN medicos ON paciente_medico.FK_medico = medicos.idmedicos WHERE paciente_medico.FK_paciente = ?", idpacientes, (err, result) => {
         res.send(result)
     })
 })
@@ -172,7 +172,7 @@ app.post("/pacientes/:idpacientes/remedio/adicionar", (req, res) =>{
 
 app.get("/pacientes/:idpacientes/remedio", (req, res) =>{
     const idpacientes = req.params.idpacientes
-    db.query("SELECT * FROM paciente_remedio WHERE FK_paciente = ?", idpacientes, (err, result) => {
+    db.query("SELECT remedios.nome, paciente_remedio.qte, paciente_remedio.data FROM paciente_remedio INNER JOIN remedios ON paciente_remedio.FK_remedio = remedios.idremedios WHERE paciente_remedio.FK_paciente = ?", idpacientes, (err, result) => {
         res.send(result)
     })
 })
@@ -202,4 +202,4 @@ app.post("/pacientes/:idpacientes/leito/inserir", (req, res) =>{
 
 app.listen(3001, () => {
     console.log("rodando na porta 3001")
-});
+})

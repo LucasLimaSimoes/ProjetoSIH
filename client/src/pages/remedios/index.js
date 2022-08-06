@@ -3,6 +3,7 @@ import Axios from 'axios'
 import './remedios.css'
 import {AiFillHome} from "react-icons/ai";
 import {Link} from 'react-router-dom';
+import _ from 'lodash';
 
 
 function Remedios () {
@@ -13,6 +14,7 @@ function Remedios () {
     const [validade, setValidade] = useState(new Date())
     const [remediosList, setRemediosList] = useState([])
     const [remediosVencerList, setRemediosVencerList] = useState([])
+    const [estoqueRemedios, setEstoqueRemedios] = useState([])
 
     const cadastrarRemedio = () =>{
         Axios.post("http://localhost:3001/remedios/cadastro", {nome:nome, qte:qte, lote:lote, validade:validade})
@@ -39,6 +41,17 @@ function Remedios () {
             setRemediosVencerList(response.data)
         })
     })
+
+    useEffect(() => {
+        Axios.get("http://localhost:3001/remedios/estoque").then((response) => {
+            setEstoqueRemedios(response.data)
+        })
+    })
+
+    const values = _.groupBy(estoqueRemedios, (value) => value.nome)
+	const result = _.map(values, (value, key) => [
+        key, _.sumBy(values[key], (v) => v.qte),
+    ])
     
     return(
         <div className='container_remedios'>
@@ -61,27 +74,32 @@ function Remedios () {
                     <input type='date' name='validade' placeholder='Validade' onChange={(e)=>{
                         setValidade(e.target.value)
                     }}/>
+                    <button type='submit' onClick={cadastrarRemedio}>Cadastrar</button>
                 </div>
-                <button type='submit' onClick={cadastrarRemedio}>Cadastrar</button>
             </div>
+            <hr/>
             <div className='r_vencer'>
                 <h1 className='r_tituloVencer'>Remédios Perto do Vencimento</h1>
                 {remediosVencerList.map((value) => {
                     if (value.dias < 31) {
+                        const data1 = value.validade.split('T')
+                        const data2 = data1[0]
+                        const dataFormatada = data2.split('-').reverse().join('/')
                         return(
                             <div className='card_vencer'>
-                                <h2>{value.nome} | {value.qte} | {value.lote} | {value.validade} | {value.dias}</h2>
-                                <button onClick={() => {deletarRemedio(value.lote, value.nome)}}>Apagar</button>
+                                <p>Nome: {value.nome} | Quantidade: {value.qte} | Lote: {value.lote} | Data de Validade: {dataFormatada} | Dias até o Vencimento: {value.dias}</p>
+                                <button onClick={() => {deletarRemedio(value.lote, value.nome)}}>Descartar</button>
                             </div>
                     )}
                 })}
             </div>
+            <hr/>
             <div className='r_listagem'>
                 <h1 className='r_titulo'>Listagem de Remedios</h1>
-                {remediosList.map((value) => {
+                {result.map((value) => {
                     return(
                         <div className='card_r'>
-                            <h2>{value.nome} | {value.qte}</h2>
+                            <p>Nome: {value[0]} | Quantidade em Estoque: {value[1]}</p>
                         </div>
                     )
                 })}

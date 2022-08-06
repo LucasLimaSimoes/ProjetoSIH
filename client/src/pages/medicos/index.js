@@ -21,7 +21,6 @@ function Medicos () {
 
     const deletarMedico = (crm) =>{
         Axios.delete(`http://localhost:3001/medicos/deletar/${crm}`)
-        //setMedicosList([...medicosList, {nome:nome, crm:crm},])
         .then(() => {
             alert("Apagado com sucesso")
         })
@@ -48,15 +47,16 @@ function Medicos () {
                     <input type='number' name='crm' placeholder='CRM'onChange={(e)=>{
                         setCRM(e.target.value)
                     }}/>
+                    <button type='submit' onClick={cadastrarMedico}>Cadastrar</button>
                 </div>
-                <button type='submit' onClick={cadastrarMedico}>Cadastrar</button>
             </div>
+            <hr/>
             <div className='m_listagem'>
                 <h1 className='m_titulo'>Listagem de Médicos</h1>
                 {medicosList.map((value) => {
                     return(
                         <div className='card_m'>
-                            <h2>{value.nome} | {value.crm}</h2>
+                            <p>Nome: {value.nome} | CRM: {value.crm}</p>
                             <button onClick={() => {deletarMedico(value.crm)}}>Apagar</button>
                         </div>
                     )

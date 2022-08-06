@@ -127,50 +127,65 @@ function PacientesDetalhes () {
                     )
                 })}
         </div>
+        <hr/>
         <div className='detalhes_medicos'>
             <h1>Consultas já feitas</h1>
             {consultas.map((value) => {
+                    const data1 = value.data.split('T')
+                    const data2 = data1[0]
+                    const dataFormatada = data2.split('-').reverse().join('/')
                     return(
                         <div className='detalhes_medicos_sub'>
-                            <p>Médico: {value.FK_medico} | Prontuário: {value.prontuario} | Data: {value.data}</p>
+                            <p>Médico: {value.nome} | Prontuário: {value.prontuario} | Data: {dataFormatada}</p>
                         </div>
                     )
                 })}
+            <hr/>
             <h1>Cadastrar nova consulta</h1>
-            <select name='selecaoMedico' onChange={(e)=>{setMedico(e.target.value)}}>
-                {medicosList.map((value) => {
-                    return(
-                        <option value={value.idmedicos}>{value.nome}</option>
-                    )
-                })}
-            </select>
-            <input type='number' name='prontuario' placeholder='Prontuário' onChange={(e)=>{
-                setProntuario(e.target.value)
-            }}/>
-            <button type='submit' onClick={atualizarConsulta}>Gravar Consulta</button>
+            <div className='consulta_nova'>
+                <select name='selecaoMedico' onChange={(e)=>{setMedico(e.target.value)}}>
+                    {medicosList.map((value) => {
+                        return(
+                            <option value={value.idmedicos}>{value.nome}</option>
+                        )
+                    })}
+                </select>
+                <input type='number' name='prontuario' placeholder='Prontuário' onChange={(e)=>{
+                    setProntuario(e.target.value)
+                }}/>
+                <button type='submit' onClick={atualizarConsulta}>Gravar Consulta</button>
+            </div>
         </div>
+        <hr/>
         <div className='detalhes_remedios'>
             <h1>Remédios tomados</h1>
             {remediosLevadosList.map((value) => {
+                    const data1 = value.data.split('T')
+                    const data2 = data1[0]
+                    const dataFormatada = data2.split('-').reverse().join('/')
                     return(
                         <div className='detalhes_remedios_sub'>
-                            <p>Remédio: {value.FK_remedio} | Quantidade: {value.qte} | Data: {value.data}</p>
+                            <p>Remédio: {value.nome} | Quantidade: {value.qte} | Data: {dataFormatada}</p>
                         </div>
                     )
                 })}
+            <hr/>
             <h1>Tomar novo remédio</h1>
-            <select name='selecaoRemedio' onChange={(e)=>{setRemedio(e.target.value)}}>
-            {remediosList.map((value) => {
-                    return(
-                        <option value={value.idremedios}>{value.nome} Lote: {value.lote}</option>
-                    )
-                })}
-            </select>
-            <input type='number' name='qte' placeholder='Quantidade' onChange={(e)=>{
-                setQTE(e.target.value)
-            }}/>
-            <button type='submit' onClick={atualizarRemedios}>Atualizar Remédios</button>
+            <div className='remedio_novo'>
+                <select name='selecaoRemedio' onChange={(e)=>{setRemedio(e.target.value)}}>
+                {remediosList.map((value) => {
+                        return(
+                            <option value={value.idremedios}>{value.nome} Lote: {value.lote}</option>
+                        )
+                    })}
+                </select>
+                <input type='number' name='qte' placeholder='Quantidade' onChange={(e)=>{
+                    setQTE(e.target.value)
+                }}/>
+                <button type='submit' onClick={atualizarRemedios}>Atualizar Remédios</button>
+            </div>
         </div>
+        <hr/>
         <div className='detalhes_leito'>
             <h1>Seleção de leito</h1>
             {leitoOcupado.map((value) => {

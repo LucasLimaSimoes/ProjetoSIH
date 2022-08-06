@@ -9,23 +9,18 @@ function Login () {
 
     const navigate = useNavigate()
   
-    /*const login = () => {
-      Axios.post("http://localhost:3001/login", {user: user, password: password}
-      ).then((response) =>{
-        console.log(response)
-        if (response.data) {
+    const login = () => {
+      Axios.post("http://localhost:3001/login", {user:user, password:password})
+      .then((response) =>{
+        if (response.data.length>0) {
           alert("Logado com sucesso");
           navigate("/home")
+        }else{
+          alert("Usuário ou senha incorretos")
         }
       })
-    }*/
-
-    const temp = () => {
-      if (user == 'admin' && password == 'admin') {
-        alert("Logado com sucesso");
-        navigate("/home")
-      }
     }
+    
   
     return (
       <div className="container">
@@ -37,7 +32,7 @@ function Login () {
           <input type="text" name="password" placeholder="Senha" onChange={(e)=>{
             setPassword(e.target.value)
           }}></input>
-          <button className="buttonEnter" onClick={temp}>Entrar</button>
+          <button className="buttonEnter" onClick={login}>Entrar</button>
         </div>
       </div>
     );

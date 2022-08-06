@@ -39,15 +39,16 @@ function Pacientes () {
                     <input type='number' name='sus' placeholder='Número do cartão SUS'onChange={(e)=>{
                         setSUS(e.target.value)
                     }}/>
+                    <button type='submit' onClick={cadastrarPaciente}>Cadastrar</button>
                 </div>
-                <button type='submit' onClick={cadastrarPaciente}>Cadastrar</button>
             </div>
+            <hr/>
             <div className='p_listagem'>
                 <h1 className='p_titulo'> Listagem de Pacientes</h1>
                 {pacientesList.map((value) => {
                     return(
                         <div className='card_p'>
-                            <h2>{value.nome} | {value.sus}</h2>
+                            <p>Nome: {value.nome} | Número do Catão SUS: {value.sus}</p>
                             <Link to={'/pacientes/'+value.idpacientes}><button>Detalhes</button></Link>
                         </div>
                     )
