@@ -20,15 +20,3 @@
 .subtitulo{
     padding: 15px;
 }
-
-.rodape{
-    background-color: rgb(0, 66, 121);
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.rodape_titulo{
-    color: white;
-}

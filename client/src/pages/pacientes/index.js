@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import './pacientes.css'
-import Axios from 'axios'
+import './pacientes.css';
+import Axios from 'axios';
 import {AiFillHome} from "react-icons/ai";
 import {Link} from 'react-router-dom';
 
 
 function Pacientes () {
 
-    const [nome, setNome] = useState('')
-    const [sus, setSUS] = useState(0)
-    const [pacientesList, setPacientesList] = useState([])
+    const [nome, setNome] = useState('') //variavel pra receber o nome do paciente
+    const [sus, setSUS] = useState(0) //variavel pra receber o numero do cartao do sus
+    const [pacientesList, setPacientesList] = useState([]) //variavel pra receber a lista de pacientes do backend
 
-    const cadastrarPaciente = () =>{
-        Axios.post("http://localhost:3001/pacientes/cadastro", {nome:nome, sus:sus})
-        .then(() => {
-            alert("Cadastro realizado com sucesso")
-        })
+    const cadastrarPaciente = () => { //cadastra novo paciente no bd
+        if (nome == '') { //verifica se ha pelo menos um nome preenchido
+            alert("Por favor preencha ao menos um nome")
+        } else { //caso esteja
+            Axios.post("http://localhost:3001/pacientes/cadastro", {nome:nome, sus:sus})
+            .then(() => {
+                alert("Cadastro realizado com sucesso")
+            })
+        }
     }
 
-    useEffect(() => {
+    useEffect(() => { //busca a lista de paciententes do backend
         Axios.get("http://localhost:3001/pacientes").then((response) => {
             setPacientesList(response.data)
         })
@@ -54,9 +58,6 @@ function Pacientes () {
                     )
                 })}
             </div>
-            <footer className='rodape'>
-                <h1 className='rodape_titulo'>Feito por Lucas Lima Simões</h1>
-            </footer>
         </div>
     );
 }

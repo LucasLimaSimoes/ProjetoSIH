@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import './medicos.css'
-import Axios from 'axios'
+import React, {useState, useEffect} from 'react';
+import './medicos.css';
+import Axios from 'axios';
 import {AiFillHome} from "react-icons/ai";
 import {Link} from 'react-router-dom';
 
 
 function Medicos () {
 
-    const [nome, setNome] = useState('')
-    const [crm, setCRM] = useState(0)
-    const [medicosList, setMedicosList] = useState([])
+    const [nome, setNome] = useState('') //variavel pra receber nome do medico
+    const [crm, setCRM] = useState(0) //variavel pra receber o CRM do medico
+    const [medicosList, setMedicosList] = useState([]) //variavel pra receber a lista de medicos do backend
 
-    const cadastrarMedico = () =>{
-        Axios.post("http://localhost:3001/medicos/cadastro", {nome:nome, crm:crm})
-        setMedicosList([...medicosList, {nome:nome, crm:crm},])
-        .then(() => {
-            alert("Cadastro realizado com sucesso")
-        })
-    }
-
-    const deletarMedico = (crm) =>{
-        Axios.delete(`http://localhost:3001/medicos/deletar/${crm}`)
-        .then(() => {
-            alert("Apagado com sucesso")
-        })
+    const cadastrarMedico = () => { //cadastra um novo medico no banco de dados
+        if (nome == '' || crm == 0) { //verifica se os dados estao preenchidos
+            alert("Por favor preencha os dados")
+        } else { //caso estejam
+            Axios.post("http://localhost:3001/medicos/cadastro", {nome:nome, crm:crm}) //envia as variaveis nome e crm pro backend
+            .then(() => {
+                alert("Cadastro realizado com sucesso")
+            })
+        }
     }
 
     useEffect(() => {
-        Axios.get("http://localhost:3001/medicos").then((response) => {
-            setMedicosList(response.data)
+        Axios.get("http://localhost:3001/medicos").then((response) => { //recebe a lista de medicos do backend
+            setMedicosList(response.data) //seta a variavel medicosList com a resposta do backend
         })
     })
     
@@ -44,7 +40,7 @@ function Medicos () {
                     <input type='text' name='nome' placeholder='Nome' onChange={(e)=>{
                         setNome(e.target.value)
                     }}/>
-                    <input type='number' name='crm' placeholder='CRM'onChange={(e)=>{
+                    <input type='number' name='crm' placeholder='CRM' onChange={(e)=>{
                         setCRM(e.target.value)
                     }}/>
                     <button type='submit' onClick={cadastrarMedico}>Cadastrar</button>
@@ -57,14 +53,10 @@ function Medicos () {
                     return(
                         <div className='card_m'>
                             <p>Nome: {value.nome} | CRM: {value.crm}</p>
-                            <button onClick={() => {deletarMedico(value.crm)}}>Apagar</button>
                         </div>
                     )
                 })}
             </div>
-            <footer className='rodape'>
-                <h1 className='rodape_titulo'>Feito por Lucas Lima Simões</h1>
-            </footer>
         </div>
     );
 }

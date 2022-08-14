@@ -7,22 +7,39 @@ Faça o download do .zip ou use
 ```shell
 git clone git@github.com:LucasLimaSimoes/tcc.git
 ```
-para clonar o repositório
+para clonar o repositório do projeto
 
-## Setup
+Importe também o SQL do banco de dados para o seu próprio banco 
 
-Entre na pasta usando
+Garanta que a conexão vai ocorrer com sucesso. Verifique se será necessário fazer alguma mudança (como usuário ou senha) no arquivo index.js na pasta server
+
+Entre na pasta do projeto usando
 ```shell
 cd tcc
 ```
-Ou abra ela no seu editor de código de preferência
+ou abra ela no seu editor de código de preferência
 
 Instale as dependências do npm usando
 ```shell
 npm install
 ```
 
-Inicie o projeto usando
+## Inicialização
+
+Inicie o projeto, primeiramente no backend usando
+```shell
+cd server
+```
+em seguida
+```shell
+npm run dev
+```
+
+Agora vá para o frontend e inicie ele
+```shell
+cd client
+```
+em seguida
 ```shell
 npm start
 ```

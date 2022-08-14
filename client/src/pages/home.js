@@ -33,9 +33,6 @@ function Home () {
                     Clique neste ícone para ir para a página de leitos
                 </h2>
             </div>
-            <footer className='rodape'>
-                <h1 className='rodape_titulo'>Feito por Lucas Lima Simões</h1>
-            </footer>
         </div>
     );
 }
