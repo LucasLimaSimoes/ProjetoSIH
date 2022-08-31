@@ -36,17 +36,25 @@ function PacientesDetalhes () {
     }
 
     const atualizarConsulta = () => { //cadastra uma nova consulta do paciente
-        Axios.post(`http://localhost:3001/pacientes/${idpacientes}/consulta/adicionar`, {medico:medico, prontuario:prontuario})
-        .then(() => {
-            alert("Dados de consulta cadastrados")
-        })
+        if (medico == 0 || prontuario == 0 ) { //verifica se os dados da consulta estao preenchidos
+            alert("Preencha os dados da consulta")
+        } else { //caso estejam
+            Axios.post(`http://localhost:3001/pacientes/${idpacientes}/consulta/adicionar`, {medico:medico, prontuario:prontuario})
+            .then(() => {
+                alert("Dados de consulta cadastrados")
+            })
+        }
     }
 
     const atualizarRemedios = () => { //cadastra um novo remedio tomado pelo paciente
-        Axios.post(`http://localhost:3001/pacientes/${idpacientes}/remedio/adicionar`, {remedio:remedio, qte:qte})
-        .then(() => {
-            alert("Dados de remedios cadastrados")
-        })
+        if (remedio == 0 || qte == 0) {
+            alert("Preencha os dados do remédio")
+        } else {
+            Axios.post(`http://localhost:3001/pacientes/${idpacientes}/remedio/adicionar`, {remedio:remedio, qte:qte})
+            .then(() => {
+                alert("Dados de remedios cadastrados")
+            })
+        }
     }
 
     const atualizarLeito = () => { //atualiza a situacao de leito do paciente
@@ -141,7 +149,7 @@ function PacientesDetalhes () {
                     const dataFormatada = data2.split('-').reverse().join('/')
                     return(
                         <div className='detalhes_medicos_sub'>
-                            <p>Médico: {value.nome} | Prontuário: {value.prontuario} | Data: {dataFormatada}</p>
+                            <p>Médico: {value.nome} | Especialidade: {value.especialidade} | Prontuário: {value.prontuario} | Data: {dataFormatada}</p>
                         </div>
                     )
                 })}
@@ -151,7 +159,7 @@ function PacientesDetalhes () {
                 <select name='selecaoMedico' onChange={(e)=>{setMedico(e.target.value)}}>
                     {medicosList.map((value) => {
                         return(
-                            <option value={value.idmedicos}>{value.nome}</option>
+                            <option value={value.idmedicos}>{value.nome} {value.especialidade}</option>
                         )
                     })}
                 </select>

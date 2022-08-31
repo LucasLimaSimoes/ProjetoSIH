@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Ago-2022 às 19:34
+-- Tempo de geração: 30-Ago-2022 às 18:45
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 7.4.29
 
@@ -50,17 +50,18 @@ INSERT INTO `leitos` (`idleitos`, `tipo`, `qte`) VALUES
 CREATE TABLE `medicos` (
   `idmedicos` int(11) NOT NULL,
   `nome` text NOT NULL,
-  `crm` int(11) NOT NULL
+  `crm` int(11) NOT NULL,
+  `especialidade` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `medicos`
 --
 
-INSERT INTO `medicos` (`idmedicos`, `nome`, `crm`) VALUES
-(2, 'Maria das Dores', 5678),
-(3, 'João da Silva', 1234),
-(6, 'Lorrane Lima', 1583);
+INSERT INTO `medicos` (`idmedicos`, `nome`, `crm`, `especialidade`) VALUES
+(2, 'Maria das Dores', 5678, 'Cardiologista'),
+(3, 'João da Silva', 1234, 'Cardiologista'),
+(6, 'Lorrane Lima', 1583, 'Ortopedista');
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,7 @@ CREATE TABLE `paciente_leito` (
 --
 
 INSERT INTO `paciente_leito` (`FK_paciente`, `leito`) VALUES
-(1, 'UTI'),
+(1, 'Enfermaria'),
 (2, 'UTI');
 
 -- --------------------------------------------------------
@@ -268,7 +269,7 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de tabela `remedios`
 --
 ALTER TABLE `remedios`
-  MODIFY `idremedios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idremedios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`

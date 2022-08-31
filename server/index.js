@@ -51,7 +51,8 @@ app.post("/login", (req,res) => { //faz o login de um usuario
 app.post("/medicos/cadastro", (req,res) => { //insere um novo registro na tabela medicos
     const nome = req.body.nome
     const crm = req.body.crm
-    db.query("INSERT INTO medicos (nome, crm) VALUES (?,?)", [nome, crm], (err, result) => {
+    const especialidade = req.body.especialidade
+    db.query("INSERT INTO medicos (nome, crm, especialidade) VALUES (?,?,?)", [nome, crm, especialidade], (err, result) => {
         res.send(result)
     })
 })
@@ -161,7 +162,7 @@ app.post("/pacientes/:idpacientes/consulta/adicionar", (req, res) => { //insere 
 
 app.get("/pacientes/:idpacientes/consulta", (req, res) => { //devolve os registros de determinado paciente na tabela paciente_medico
     const idpacientes = req.params.idpacientes
-    db.query("SELECT medicos.nome, paciente_medico.prontuario, paciente_medico.data FROM paciente_medico INNER JOIN medicos ON paciente_medico.FK_medico = medicos.idmedicos WHERE paciente_medico.FK_paciente = ?", idpacientes, (err, result) => {
+    db.query("SELECT medicos.nome, medicos.especialidade, paciente_medico.prontuario, paciente_medico.data FROM paciente_medico INNER JOIN medicos ON paciente_medico.FK_medico = medicos.idmedicos WHERE paciente_medico.FK_paciente = ?", idpacientes, (err, result) => {
         res.send(result)
     })
 })

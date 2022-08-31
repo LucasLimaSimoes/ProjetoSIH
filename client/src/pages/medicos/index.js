@@ -9,13 +9,14 @@ function Medicos () {
 
     const [nome, setNome] = useState('') //variavel pra receber nome do medico
     const [crm, setCRM] = useState(0) //variavel pra receber o CRM do medico
+    const [especialidade, setEspecialidade] = useState('') //variavel pra receber a especialidade do medico
     const [medicosList, setMedicosList] = useState([]) //variavel pra receber a lista de medicos do backend
 
     const cadastrarMedico = () => { //cadastra um novo medico no banco de dados
-        if (nome == '' || crm == 0) { //verifica se os dados estao preenchidos
+        if (nome == '' || crm == 0 || especialidade == '') { //verifica se os dados estao preenchidos
             alert("Por favor preencha os dados")
         } else { //caso estejam
-            Axios.post("http://localhost:3001/medicos/cadastro", {nome:nome, crm:crm}) //envia as variaveis nome e crm pro backend
+            Axios.post("http://localhost:3001/medicos/cadastro", {nome:nome, crm:crm, especialidade:especialidade}) //envia as variaveis nome, crm e especialidade pro backend
             .then(() => {
                 alert("Cadastro realizado com sucesso")
             })
@@ -43,6 +44,9 @@ function Medicos () {
                     <input type='number' name='crm' placeholder='CRM' onChange={(e)=>{
                         setCRM(e.target.value)
                     }}/>
+                    <input type='text' name='especialidade' placeholder='Especialidade' onChange={(e)=>{
+                        setEspecialidade(e.target.value)
+                    }}/>
                     <button type='submit' onClick={cadastrarMedico}>Cadastrar</button>
                 </div>
             </div>
@@ -52,7 +56,7 @@ function Medicos () {
                 {medicosList.map((value) => {
                     return(
                         <div className='card_m'>
-                            <p>Nome: {value.nome} | CRM: {value.crm}</p>
+                            <p>Nome: {value.nome} | CRM: {value.crm} | Especialidade: {value.especialidade}</p>
                         </div>
                     )
                 })}
