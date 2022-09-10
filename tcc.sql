@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Ago-2022 às 18:45
+-- Tempo de geração: 10-Set-2022 às 17:54
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 7.4.29
 
@@ -24,22 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `leitos`
+-- Estrutura da tabela `hospitais`
 --
 
-CREATE TABLE `leitos` (
-  `idleitos` int(11) NOT NULL,
-  `tipo` varchar(50) NOT NULL,
-  `qte` int(11) NOT NULL
+CREATE TABLE `hospitais` (
+  `idhospitais` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `UTI` int(11) NOT NULL,
+  `Enfermaria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `leitos`
+-- Extraindo dados da tabela `hospitais`
 --
 
-INSERT INTO `leitos` (`idleitos`, `tipo`, `qte`) VALUES
-(1, 'UTI', 50),
-(2, 'Enfermaria', 100);
+INSERT INTO `hospitais` (`idhospitais`, `nome`, `UTI`, `Enfermaria`) VALUES
+(1, 'Hospital A', 50, 100),
+(2, 'Hospital B', 150, 110),
+(3, 'Hospital C', 25, 50);
 
 -- --------------------------------------------------------
 
@@ -191,10 +193,10 @@ INSERT INTO `usuarios` (`iduser`, `usuario`, `senha`) VALUES
 --
 
 --
--- Índices para tabela `leitos`
+-- Índices para tabela `hospitais`
 --
-ALTER TABLE `leitos`
-  ADD PRIMARY KEY (`idleitos`);
+ALTER TABLE `hospitais`
+  ADD PRIMARY KEY (`idhospitais`);
 
 --
 -- Índices para tabela `medicos`
@@ -248,16 +250,16 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de tabela `leitos`
+-- AUTO_INCREMENT de tabela `hospitais`
 --
-ALTER TABLE `leitos`
-  MODIFY `idleitos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `hospitais`
+  MODIFY `idhospitais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `idmedicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idmedicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `pacientes`

@@ -107,8 +107,9 @@ app.get("/remedios/estoque", (req,res) => { //devolve registros da tabela remedi
 })
 
 //leitos
-app.get("/leitos", (req, res) => { //devolve todos os registros da tabela leitos
-    db.query("SELECT * FROM leitos", (err, result) => {
+app.get("/:selecaoHospital/leitos", (req, res) => { //devolve determinada linha da tabela hospitais
+    const selecaoHospital = req.params.selecaoHospital
+    db.query("SELECT * FROM hospitais WHERE idhospitais = ?", selecaoHospital, (err, result) => {
         res.send(result)
     })
 })
