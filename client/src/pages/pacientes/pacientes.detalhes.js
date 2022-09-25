@@ -171,19 +171,19 @@ function PacientesDetalhes () {
         </div>
         <hr/>
         <div className='detalhes_remedios'>
-            <h1>Remédios tomados</h1>
+            <h1>Medicações administradas</h1>
             {remediosLevadosList.map((value) => {
                     const data1 = value.data.split('T')
                     const data2 = data1[0]
                     const dataFormatada = data2.split('-').reverse().join('/')
                     return(
                         <div className='detalhes_remedios_sub'>
-                            <p>Remédio: {value.nome} | Quantidade: {value.qte} | Data: {dataFormatada}</p>
+                            <p>Medicação: {value.nome} | Quantidade: {value.qte} | Data: {dataFormatada}</p>
                         </div>
                     )
                 })}
             <hr/>
-            <h1>Tomar novo remédio</h1>
+            <h1>Tomar nova medicação</h1>
             <div className='remedio_novo'>
                 <select name='selecaoRemedio' onChange={(e)=>{setRemedio(e.target.value)}}>
                 {remediosList.map((value) => {

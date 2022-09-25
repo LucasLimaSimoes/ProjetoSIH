@@ -58,7 +58,7 @@ function Remedios () {
                 <h2 className='cabecalho_titulo'>Página de Remédios</h2>
             </header>
             <div className='r_cadastro'>
-                <h1 className='r_titulo'>Cadastro de Remedios</h1>
+                <h1 className='r_titulo'>Cadastro de Medicações</h1>
                 <div className='subCadastro'>
                     <input type='text' name='nome' placeholder='Nome' onChange={(e)=>{
                         setNome(e.target.value)
@@ -77,7 +77,7 @@ function Remedios () {
             </div>
             <hr/>
             <div className='r_vencer'>
-                <h1 className='r_tituloVencer'>Remédios Perto do Vencimento</h1>
+                <h1 className='r_tituloVencer'>Medicações Perto do Vencimento</h1>
                 {remediosVencerList.map((value) => { //percorre a variavel remediosVencerList
                     if (value.dias < 31) { //verifica os dias ate o vencimento, exibe se menor que 31 dias
                         const data1 = value.validade.split('T') //formatacao de data
@@ -93,7 +93,7 @@ function Remedios () {
             </div>
             <hr/>
             <div className='r_listagem'>
-                <h1 className='r_titulo'>Listagem de Remedios</h1>
+                <h1 className='r_titulo'>Listagem de Medicações</h1>
                 {result.map((value) => { //percorre a variavel result, que possui os remedios em estoque
                     return(
                         <div className='card_r'>

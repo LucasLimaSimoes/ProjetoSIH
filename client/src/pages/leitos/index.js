@@ -91,8 +91,8 @@ function Leitos () {
               <h1>Selecione o hospital do qual deseja verificar os leitos:</h1>
               <select name='teste' onChange={(e)=>{setSelecaoHospital(e.target.value)}}>
                   <option value='1'>Este Hospital</option>
-                  <option value='2'>Hospital 2</option>
-                  <option value='3'>Hospital 3</option>
+                  <option value='2'>Hospital B</option>
+                  <option value='3'>Hospital C</option>
               </select>
               <button className="carregar" onClick={carregar}>Carregar Gráficos</button>
             </div>

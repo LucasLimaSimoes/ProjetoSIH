@@ -16,22 +16,50 @@ function Home () {
             <div className='home'>
                 <h1 className='titulo'>Bem vindo ao Sistema de Informação Hospitalar</h1>
                 <h2 className='subtitulo'>Você está na página principal, selecione abaixo o que deseja fazer</h2>
-                <h2>
-                    <Link to="/medicos"><BiHealth size={25} color = "000"/></Link>
-                    Clique neste ícone para ir para a página de médicos
-                </h2>
-                <h2>
-                    <Link to="/pacientes"><BsFillPersonFill size={25} color = "000"/></Link>
-                    Clique neste ícone para ir para a página de pacientes
-                </h2>
-                <h2>
-                    <Link to="/remedios"><AiFillMedicineBox size={25} color = "000"/></Link>
-                    Clique neste ícone para ir para a página de remédios
-                </h2>
-                <h2>
-                    <Link to="/leitos"><FaBed size={25} color = "000"/></Link>
-                    Clique neste ícone para ir para a página de leitos
-                </h2>
+                <div className='grid'>
+                <Link to="/medicos"><div className='card'>
+                    <h2>
+                        <div className='icone'>
+                            <BiHealth size={25} color = "000"/>
+                        </div>
+                        <div className='texto'>
+                            Clique aqui para ir para a página de médicos
+                        </div>
+                    </h2>
+                </div></Link>
+                <Link to="/pacientes"><div className='card'>
+                    <h2>
+                        <div className='icone'>
+                            <BsFillPersonFill size={25} color = "000"/>
+                        </div>
+                        <div className='texto'>
+                            Clique aqui para ir para a página de pacientes
+                        </div>
+                    </h2>
+                </div></Link>
+                </div>
+                <div className='grid'>
+                <Link to="/remedios"><div className='card'>
+                    <h2>
+                        <div className='icone'>
+                            <AiFillMedicineBox size={25} color = "000"/>
+                        </div>
+                        <div className='texto'>
+                            Clique aqui para ir para a página de medicações
+                        </div>
+                    </h2>
+                </div></Link>
+                <Link to="/leitos"><div className='card'>
+                    <h2>
+                        <div className='icone'>
+                            <FaBed size={25} color = "000"/>
+                        </div>
+                        <div className='texto'>
+                            Clique aqui para ir para a página de leitos
+                        </div>
+                    </h2>
+                </div></Link>
+                </div>
             </div>
         </div>
     );

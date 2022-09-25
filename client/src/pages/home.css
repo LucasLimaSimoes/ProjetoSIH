@@ -20,3 +20,31 @@
 .subtitulo{
     padding: 15px;
 }
+
+.grid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.card{
+    background-color: rgb(172, 171, 171);
+    padding: 0px 25px 25px 25px;
+    margin: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 1px 3px 8px black;
+}
+
+.icone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.texto{
+    color: black;
+}

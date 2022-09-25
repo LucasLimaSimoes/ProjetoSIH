@@ -14,6 +14,10 @@
     flex-direction: row;
 }
 
+.subCadastro input{
+    margin: 3px;
+}
+
 .card_vencer{
     display: flex;
     flex-direction: row;
@@ -22,6 +26,11 @@
     border: 5px solid red;
     border-radius: 15px;
     padding: 5px;
+    margin: 10px;
+}
+
+.card_vencer button{
+    margin-left: 5px;
 }
 
 .card_r{
@@ -32,4 +41,5 @@
     border: 5px solid black;
     border-radius: 15px;
     padding: 5px;
+    margin: 10px;
 }
