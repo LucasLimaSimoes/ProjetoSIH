@@ -67,17 +67,17 @@ function Leitos () {
 
     const data_uti = [ //dados para o grafico de UTI
       ["Situação", "Quantidade"],
-      ["Live", UTILivre],
+      ["Livre", UTILivre],
       ["Ocupado", UTIOcupado],
     ];
     const data_enfermaria = [ //dados para o grafico de Enfermaria
       ["Situação", "Quantidade"],
-      ["Live", EnfermariaLivre],
+      ["Livre", EnfermariaLivre],
       ["Ocupado", EnfermariaOcupado],
     ];
     const data_total = [ //dados para o grafico total
       ["Situação", "Quantidade"],
-      ["Live", (UTILivre+EnfermariaLivre)],
+      ["Livre", (UTILivre+EnfermariaLivre)],
       ["Ocupado", (UTIOcupado+EnfermariaOcupado)],
     ];
 
