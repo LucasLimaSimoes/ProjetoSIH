@@ -5,7 +5,7 @@
 
 Faça o download do .zip ou use
 ```shell
-git clone git@github.com:LucasLimaSimoes/tcc.git
+git clone git@github.com:LucasLimaSimoes/ProjetoSIH.git
 ```
 para clonar o repositório do projeto
 
@@ -15,7 +15,7 @@ Garanta que a conexão vai ocorrer com sucesso. Verifique se será necessário f
 
 Entre na pasta do projeto usando
 ```shell
-cd tcc
+cd ProjetoSIH
 ```
 ou abra ela no seu editor de código de preferência
 
